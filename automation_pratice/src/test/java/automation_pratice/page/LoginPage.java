@@ -1,8 +1,13 @@
 package automation_pratice.page;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import automation_pratice.core.BasePage;
+import automation_pratice.core.DriverFactory;
 
 public class LoginPage extends BasePage{
 
@@ -39,7 +44,7 @@ public class LoginPage extends BasePage{
     }
 
     public void setPassword(String password){
-        escrever("passwd", senha);
+        escrever("passwd", password);
     }
 
 
@@ -81,5 +86,21 @@ public class LoginPage extends BasePage{
 
     public void setMobilePhone(String mobile){
         escrever("phone_mobile", mobile);
+    }
+
+    /****** Botão Registrar *****/
+
+    public void clicarBotaoRegistrar(){
+        clicarBotao("submitAccount");
+    }
+
+
+    public List<String> obterErros(){
+        List<WebElement> erros = DriverFactory.getDriver().findElements(By.xpath("//div[@class='alert alert-danger']//li"));
+        List<String> retorno = new ArrayList<String>();
+        for(WebElement erro: erros){
+            retorno.add(erro.getText());
+        }
+        return retorno;
     }
 }
