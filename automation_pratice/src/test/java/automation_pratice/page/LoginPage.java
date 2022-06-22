@@ -27,11 +27,13 @@ public class LoginPage extends BasePage{
         return obterTexto(By.xpath("//div[@id='create_account_error']/ol/li"));
     }
 
-    public void selecionarMasculino(){
+    /******* Informaçoes Pessoais *******/
+
+    public void setMasculino(){
         clicarRadio("id_gender1");
     }
 
-    public void selecionarFeminino(){
+    public void setFeminino(){
         clicarRadio("id_gender2");
     }
 
@@ -49,23 +51,23 @@ public class LoginPage extends BasePage{
 
 
     public void setDiaNasc(String dia){
-        selecionarCombo("days", dia);
+        selecionarComboValue("days", dia);
     }
     public void setMesNasc(String mes){
-        selecionarCombo("days", mes);
+        selecionarComboValue("months", mes);
     }
     public void setAnoNasc(String ano){
-        selecionarCombo("days", ano);
+        selecionarComboValue("years", ano);
     }
 
     /****** Endereço *******/
 
-    public void setFirstNameAddress(String name){
-        escrever("firstname", name);
+    public String obterFirstNameAddress(){
+        return obterValor("firstname");
     }
 
-    public void setLastNameAddress(String sobrename){
-        escrever("lastname", sobrename);
+    public String obterLastNameAddress(){
+        return obterValor("lastname");
     }
 
     public void setAddress(String texto){
@@ -77,7 +79,7 @@ public class LoginPage extends BasePage{
     }
 
     public void setState(String state){
-        selecionarCombo("id_state", state);
+        selecionarComboVisibleText("id_state", state);
     }
 
     public void setZipCode(String code){
@@ -102,5 +104,12 @@ public class LoginPage extends BasePage{
             retorno.add(erro.getText());
         }
         return retorno;
+    }
+
+
+    /****** obter mensagem *****/
+
+    public String obterSucesso(){
+        return obterTexto(By.xpath("//div[@class='header_user_info']//span"));
     }
 }

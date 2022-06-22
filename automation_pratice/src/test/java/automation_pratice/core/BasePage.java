@@ -42,6 +42,10 @@ public class BasePage {
         return getDriver().findElement(By.id(id)).getText();
     } 
 
+    public String obterValor(String id){
+        return getDriver().findElement(By.id(id)).getAttribute("value");
+    }
+
     /******* radio *******/
 
     public void clicarRadio(By by){
@@ -54,7 +58,13 @@ public class BasePage {
 
     /******* Combo ******/
 
-    public void selecionarCombo(String id_campo, String valor){
+    public void selecionarComboValue(String id_campo, String valor){
+        WebElement elemento = getDriver().findElement(By.id(id_campo));
+        Select combo = new Select(elemento);
+        combo.selectByValue(valor);
+    }
+
+    public void selecionarComboVisibleText(String id_campo, String valor){
         WebElement elemento = getDriver().findElement(By.id(id_campo));
         Select combo = new Select(elemento);
         combo.selectByVisibleText(valor);
